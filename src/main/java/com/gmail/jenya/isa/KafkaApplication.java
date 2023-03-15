@@ -14,10 +14,17 @@ public class KafkaApplication {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(KafkaTemplate<String, String> kafkaTemplate){
+	CommandLineRunner commandLineRunner(KafkaTemplate<String, String> kafkaTemplate) {
 		return args -> {
-			for(int i = 0; i < 10; i++) {
-				kafkaTemplate.send("test", "Testing Monday Kafka" + i);
+			String text = "{" +
+					"\"message\": \"Kafka Listener API\"," +
+					"\"name\": \"Jenya\"," +
+					"\"age\": 20," +
+					"\"height\": 180," +
+					"\"weight\": 74" +
+					"}";
+			for (int i = 0; i < 10; i++) {
+				kafkaTemplate.send("test", text + "\t" + i);
 			}
 		};
 	}
